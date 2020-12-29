@@ -17,69 +17,63 @@
 
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
-  QMKBEST = SAFE_RANGE,
-  QMKURL
+  DM_WORD = SAFE_RANGE,
+  DM_BACK
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap (Base Layer) Default Layer
    * ,----------------------------------------------------------------.
-   * | ` |  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |Home|
+   * | ` |  1|  2|  3|  4|  5|  6|  7|  8|  9|  0|  -|  =|Backsp |F1  |
    * |----------------------------------------------------------------|
-   * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  |PgUp|
+   * |Tab  |  Q|  W|  E|  R|  T|  Y|  U|  I|  O|  P|  [|  ]|  \  |F2  |
    * |----------------------------------------------------------------|
-   * |Escape |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return |PgDn|
+   * |Escape |  A|  S|  D|  F|  G|  H|  J|  K|  L|  ;|  '|Return |F3  |
    * |----------------------------------------------------------------|
-   * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|LOWER | Up|End |
+   * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|TG(1) |PgU|F4  |
    * |----------------------------------------------------------------|
-   * |Ctrl|Alt |Cmd |        Space          |Cmd|Alt|Ctrl|Lef|Dow|Rig |
+   * |Ctrl|Alt |Cmd |        Space          |Cmd|Alt|Ctrl|F8 |PgD|F12 |
    * `----------------------------------------------------------------'
    */
 [0] = LAYOUT_65_ansi(
-  KC_GRV,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_HOME, \
-  KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_PGUP, \
-  KC_ESC,  KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_PGDN,  \
-  KC_LSFT, KC_Z,    KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, TG(1),            KC_UP,   KC_END, \
-  KC_LCTL, KC_LALT, KC_LGUI,                KC_SPC,                          KC_RGUI, KC_RALT, KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT),
+  KC_GRV,  KC_1,    KC_2,   KC_3,   KC_4,   KC_5,   KC_6,   KC_7,   KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL,  KC_BSPC, KC_F1, \
+  KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_F2, \
+  KC_ESC,  KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_F3,  \
+  KC_LSFT, KC_Z,    KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, TG(1),            KC_PGUP, KC_F4, \
+  KC_LCTL, KC_LALT, KC_LGUI,                KC_SPC,                          KC_RGUI, KC_RALT, KC_RCTL, KC_F8,   KC_PGDN, KC_F12),
 
   /* Keymap Fn Layer
    * ,----------------------------------------------------------------.
-   * |~ `|F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |F10|F11|F12|Del    |Ins |
+   * |   |F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |F10|F11|F12|Del    |Ins |
    * |----------------------------------------------------------------|
-   * |     |   |Up |   |   |   |   |   |PSc|SLk|Pau|Up |   |     |    |
+   * |     |   |WRD|   |   |   |   |   |TO0|SLk|Pau|Up |   |     |    |
    * |----------------------------------------------------------------|
    * |      |Lef|Dow|Rig|   |   |Lef|Dow| Up|Rig|   |   |        |    |
    * |----------------------------------------------------------------|
-   * |        |   |   |   |   |   |   |   |End|PDn|Dow|      |PUp|    |
+   * |        |   |   |   |   |BCK|   |   |End|PDn|Dow|      |PUp|    |
    * |----------------------------------------------------------------|
    * |    |    |    |                       |   |   |    |Hom|PDn|End |
    * `----------------------------------------------------------------'
    */
 [1] = LAYOUT_65_ansi(
   _______,   KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12,          KC_DEL,KC_INS, \
-  _______, _______,  KC_UP,_______,_______,_______,_______,_______,KC_PSCR,KC_SLCK,KC_PAUS,  KC_UP,_______,     _______,_______,   \
+  _______, _______,DM_WORD,_______,_______,_______,_______,_______,TO(0),KC_SLCK,KC_PAUS,  KC_UP,_______,     _______,_______,   \
   _______, KC_LEFT,KC_DOWN,KC_RGHT,_______,_______,KC_LEFT,KC_DOWN,KC_UP,KC_RIGHT,_______,_______,            _______,_______, \
-  _______, _______,_______,_______,_______,_______,_______,_______, KC_END,KC_PGDN,KC_DOWN,       _______,KC_PGUP,_______, \
+  _______, _______,_______,_______,_______,DM_BACK,_______,_______, KC_END,KC_PGDN,KC_DOWN,       _______,KC_PGUP,_______, \
   _______, _______,_______,                     _______,                     _______,_______,_______,KC_HOME,KC_PGDN, KC_END),
 
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   switch (keycode) {
-    case QMKBEST:
+    case DM_WORD:
       if (record->event.pressed) {
-        // when keycode QMKBEST is pressed
-        SEND_STRING("QMK is the best thing ever!");
-      } else {
-        // when keycode QMKBEST is released
+        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_RIGHT) SS_UP(X_LALT));
       }
       break;
-    case QMKURL:
+    case DM_BACK:
       if (record->event.pressed) {
-        // when keycode QMKURL is pressed
-        SEND_STRING("https://qmk.fm/" SS_TAP(X_ENTER));
-      } else {
-        // when keycode QMKURL is released
+        SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT));
       }
       break;
   }
