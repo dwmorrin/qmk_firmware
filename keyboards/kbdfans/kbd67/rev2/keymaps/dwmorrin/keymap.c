@@ -19,7 +19,6 @@
 enum custom_keycodes {
   DM_WORD = SAFE_RANGE,
   DM_BACK,
-  DM_DEL,
   DM_END,
   DM_HOME
 };
@@ -45,25 +44,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_LSFT, KC_Z,    KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, TG(1),            KC_PGUP, KC_F4, \
   KC_LCTL, KC_LALT, KC_LGUI,                KC_SPC,                          KC_RGUI, KC_RALT, KC_RCTL, KC_F8,   KC_PGDN, KC_F12),
 
-  /* Keymap Fn Layer
+  /* Keymap Vi Layer: pseudo vi normal mode
    * ,----------------------------------------------------------------.
-   * |   |   |   |   |END|   |   |   |   |F9 |HOM|F11|F12|Del    |Ins |
+   * |   |   |   |   |END|   |   |   |   |F9 |HOM|F11|F12|Del    |    |
    * |----------------------------------------------------------------|
-   * |     |   |WRD|   |   |   |   |   |TO0|SLk|Pau|Up |   |     |    |
+   * |     |   |WRD|   |   |   |   |   |TO0|   |   |   |   |     |    |
    * |----------------------------------------------------------------|
-   * |      |Lef|Dow|Rig|   |   |Lef|Dow| Up|Rig|   |   |        |    |
+   * |      |   |   |   |   |   |Lef|Dow| Up|Rig|   |   |        |    |
    * |----------------------------------------------------------------|
-   * |        |   |DEL|   |   |BCK|   |   |End|PDn|Dow|      |PUp|    |
+   * |        |   |Del|   |   |BCK|   |   |   |   |   |      |   |    |
    * |----------------------------------------------------------------|
-   * |    |    |    |                       |   |   |    |Hom|PDn|End |
+   * |    |    |    |                       |   |   |    |   |   |    |
    * `----------------------------------------------------------------'
    */
 [1] = LAYOUT_65_ansi(
-  _______, _______,_______,_______,DM_END ,_______,_______,_______,_______,  KC_F9,DM_HOME, KC_F11, KC_F12,          KC_DEL,KC_INS, \
-  _______, _______,DM_WORD,_______,_______,_______,_______,_______,TO(0),KC_SLCK,KC_PAUS,  KC_UP,_______,     _______,_______,   \
-  _______, KC_LEFT,KC_DOWN,KC_RGHT,_______,_______,KC_LEFT,KC_DOWN,KC_UP,KC_RIGHT,_______,_______,            _______,_______, \
-  _______, _______,DM_DEL ,_______,_______,DM_BACK,_______,_______, KC_END,KC_PGDN,KC_DOWN,       _______,KC_PGUP,_______, \
-  _______, _______,_______,                     _______,                     _______,_______,_______,KC_HOME,KC_PGDN, KC_END),
+  _______, _______, _______, _______,  DM_END, _______, _______, _______, _______, KC_F9,    DM_HOME, KC_F11,  KC_F12,  KC_DEL,  _______, \
+  _______, _______, DM_WORD, _______, _______, _______, _______, _______, TO(0),   _______,  _______, _______, _______, _______, _______, \
+  _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______,          _______, _______, \
+  _______, _______, KC_DEL,  _______, _______, DM_BACK, _______, _______, _______, _______,  _______, _______,          _______, _______, \
+  _______, _______, _______,                   _______,                            _______,  _______, _______, _______, _______, _______),
 
 };
 
@@ -78,11 +77,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT));
       }
-      break;
-    case DM_DEL:
-      if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("d"));
-  }
       break;
     case DM_END:
       if (record->event.pressed) {
