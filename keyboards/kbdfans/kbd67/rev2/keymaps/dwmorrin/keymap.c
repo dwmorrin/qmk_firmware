@@ -18,7 +18,10 @@
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
   DM_WORD = SAFE_RANGE,
-  DM_BACK
+  DM_BACK,
+  DM_DEL,
+  DM_END,
+  DM_HOME
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -44,22 +47,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Keymap Fn Layer
    * ,----------------------------------------------------------------.
-   * |   |F1 |F2 |F3 |F4 |F5 |F6 |F7 |F8 |F9 |F10|F11|F12|Del    |Ins |
+   * |   |   |   |   |END|   |   |   |   |F9 |HOM|F11|F12|Del    |Ins |
    * |----------------------------------------------------------------|
    * |     |   |WRD|   |   |   |   |   |TO0|SLk|Pau|Up |   |     |    |
    * |----------------------------------------------------------------|
    * |      |Lef|Dow|Rig|   |   |Lef|Dow| Up|Rig|   |   |        |    |
    * |----------------------------------------------------------------|
-   * |        |   |   |   |   |BCK|   |   |End|PDn|Dow|      |PUp|    |
+   * |        |   |DEL|   |   |BCK|   |   |End|PDn|Dow|      |PUp|    |
    * |----------------------------------------------------------------|
    * |    |    |    |                       |   |   |    |Hom|PDn|End |
    * `----------------------------------------------------------------'
    */
 [1] = LAYOUT_65_ansi(
-  _______,   KC_F1,  KC_F2,  KC_F3,  KC_F4,  KC_F5,  KC_F6,  KC_F7,  KC_F8,  KC_F9, KC_F10, KC_F11, KC_F12,          KC_DEL,KC_INS, \
+  _______, _______,_______,_______,DM_END ,_______,_______,_______,_______,  KC_F9,DM_HOME, KC_F11, KC_F12,          KC_DEL,KC_INS, \
   _______, _______,DM_WORD,_______,_______,_______,_______,_______,TO(0),KC_SLCK,KC_PAUS,  KC_UP,_______,     _______,_______,   \
   _______, KC_LEFT,KC_DOWN,KC_RGHT,_______,_______,KC_LEFT,KC_DOWN,KC_UP,KC_RIGHT,_______,_______,            _______,_______, \
-  _______, _______,_______,_______,_______,DM_BACK,_______,_______, KC_END,KC_PGDN,KC_DOWN,       _______,KC_PGUP,_______, \
+  _______, _______,DM_DEL ,_______,_______,DM_BACK,_______,_______, KC_END,KC_PGDN,KC_DOWN,       _______,KC_PGUP,_______, \
   _______, _______,_______,                     _______,                     _______,_______,_______,KC_HOME,KC_PGDN, KC_END),
 
 };
@@ -74,6 +77,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case DM_BACK:
       if (record->event.pressed) {
         SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT));
+      }
+      break;
+    case DM_DEL:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("d"));
+  }
+      break;
+    case DM_END:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("e"));
+      }
+      break;
+    case DM_HOME:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("a"));
       }
       break;
   }
