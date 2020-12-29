@@ -15,6 +15,19 @@
  */
 #include QMK_KEYBOARD_H
 
+const rgblight_segment_t PROGMEM rgb_layer_0[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 20, HSV_BLACK}
+);
+const rgblight_segment_t PROGMEM rgb_layer_1[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 20, HSV_BLUE}
+);
+
+// Now define the array of layers. Later layers take precedence
+const rgblight_segment_t* const PROGMEM dm_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    rgb_layer_0,
+    rgb_layer_1
+);
+
 // Defines the keycodes used by our macros in process_record_user
 enum custom_keycodes {
   DM_WORD = SAFE_RANGE,
@@ -96,6 +109,10 @@ void matrix_init_user(void) {
 
 }
 
+void keyboard_post_init_user(void) {
+  rgblight_layers = dm_rgb_layers;
+}
+
 void matrix_scan_user(void) {
 
 }
@@ -105,12 +122,7 @@ void led_set_user(uint8_t usb_led) {
 }
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-  switch(get_highest_layer(state)) {
-    case 1:
-      rgblight_setrgb(0xFF, 0x00, 0x00);
-      break;
-    default:
-      rgblight_setrgb(0x00, 0x00, 0x00);
-  }
+  rgblight_set_layer_state(0, layer_state_cmp(state, 0));
+  rgblight_set_layer_state(1, layer_state_cmp(state, 1));
   return state;
 }
