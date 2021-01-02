@@ -59,11 +59,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Keymap Vi Layer: pseudo vi normal mode
    * ,----------------------------------------------------------------.
-   * |   |   |   |   |END|   |   |   |   |F9 |HOM|F11|F12|Del    |    |
+   * |   |   |   |   |END|   |   |   |   |   |HOM|   |   |Lef    |    |
    * |----------------------------------------------------------------|
    * |     |   |WRD|   |   |   |   |   |TO0|   |   |   |   |     |    |
    * |----------------------------------------------------------------|
-   * |      |   |   |   |   |   |Lef|Dow| Up|Rig|   |   |        |    |
+   * |      |TO0|   |   |   |   |Lef|Dow| Up|Rig|   |   |        |    |
    * |----------------------------------------------------------------|
    * |        |   |Del|   |   |BCK|   |   |   |   |   |      |   |    |
    * |----------------------------------------------------------------|
@@ -71,9 +71,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `----------------------------------------------------------------'
    */
 [1] = LAYOUT_65_ansi(
-  _______, _______, _______, _______,  DM_END, _______, _______, _______, _______, KC_F9,    DM_HOME, KC_F11,  KC_F12,  KC_DEL,  _______, \
+  _______, _______, _______, _______,  DM_END, _______, _______, _______, _______, _______,  DM_HOME, _______,  _______, KC_LEFT,  _______, \
   _______, _______, DM_WORD, _______, _______, _______, _______, _______, TO(0),   _______,  _______, _______, _______, _______, _______, \
-  _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______,          _______, _______, \
+  _______, TO(0),   _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______,          _______, _______, \
   _______, _______, KC_DEL,  _______, _______, DM_BACK, _______, _______, _______, _______,  _______, _______,          _______, _______, \
   _______, _______, _______,                   _______,                            _______,  _______, _______, _______, _______, _______),
 
@@ -91,10 +91,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING(SS_DOWN(X_LALT) SS_TAP(X_LEFT) SS_UP(X_LALT));
       }
       break;
-    case DM_END:
+    case DM_END: // no shift == 4, with shift == END
       if (record->event.pressed) {
-        SEND_STRING(SS_LCTL("e"));
+        if (get_mods() & MOD_MASK_SHIFT) SEND_STRING(SS_LCTL("e"));
+        else register_code(KC_4);
       }
+      else if (!(get_mods() & MOD_MASK_SHIFT)) unregister_code(KC_4);
       break;
     case DM_HOME:
       if (record->event.pressed) {
