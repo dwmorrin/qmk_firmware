@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |----------------------------------------------------------------|
    * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|TG(1) |PgU|F4  |
    * |----------------------------------------------------------------|
-   * |Ctrl|Alt |Cmd | Command| TG(1)| Space |Cmd|Alt|Ctrl|F8 |PgD|F12 |
+   * |Ctrl|Alt |Cmd | Command| MO(1)| Space |Cmd|Alt|Ctrl|F8 |PgD|F12 |
    * `----------------------------------------------------------------'
    */
 [0] = LAYOUT_65_ansi_split_space(
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,   KC_E,   KC_R,   KC_T,   KC_Y,   KC_U,   KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_F2, \
   KC_ESC,  KC_A,    KC_S,   KC_D,   KC_F,   KC_G,   KC_H,   KC_J,   KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_F3,  \
   KC_LSFT, KC_Z,    KC_X,   KC_C,   KC_V,   KC_B,   KC_N,   KC_M,   KC_COMM, KC_DOT,  KC_SLSH, TG(1),            KC_PGUP, KC_F4, \
-  KC_LCTL, KC_LALT, KC_LGUI,KC_LGUI,TG(1),  KC_SPC,                          KC_RGUI, KC_RALT, KC_RCTL, KC_F8,   KC_PGDN, KC_F12),
+  KC_LCTL, KC_LALT, KC_LGUI,KC_LGUI,MO(1),  KC_SPC,                          KC_RGUI, KC_RALT, KC_RCTL, KC_F8,   KC_PGDN, KC_F12),
 
   /* Keymap Vi Layer: pseudo vi normal mode
    * ,----------------------------------------------------------------.
