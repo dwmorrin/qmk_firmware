@@ -47,7 +47,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |----------------------------------------------------------------|
    * |Shift   |  Z|  X|  C|  V|  B|  N|  M|  ,|  .|  /|Shift |PgU|F4  |
    * |----------------------------------------------------------------|
-   * |Ctrl|Alt |Cmd | Cmd/Spc| TG(1)|Ctl/Spc|Cmd|Alt|Ctrl|Hyp|PgD|F5  |
+   * |Ctrl|Alt |Cmd | MO(2)  | Space| MO(1) |Cmd|Alt|Ctrl|Hyp|PgD|F5  |
    * `----------------------------------------------------------------'
    */
 [0] = LAYOUT_65_ansi_split_space(
@@ -55,7 +55,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_Q,    KC_W,   KC_E,  KC_R,   KC_T,   KC_Y,    KC_U, KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC, KC_BSLS, KC_F2, \
   KC_ESC,  KC_A,    KC_S,   KC_D,  KC_F,   KC_G,   KC_H,    KC_J, KC_K,    KC_L,    KC_SCLN, KC_QUOT,          KC_ENT,  KC_F3,  \
   KC_LSFT, KC_Z,    KC_X,   KC_C,  KC_V,   KC_B,   KC_N,    KC_M, KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,          KC_PGUP, KC_F4, \
-  KC_LCTL, KC_LALT, KC_LGUI,LGUI_T(KC_SPC),TG(1),  RCTL_T(KC_SPC),         KC_RGUI, KC_RALT, KC_RCTL, KC_HYPR, KC_PGDN, KC_F5),
+  KC_LCTL, KC_LALT, KC_LGUI,MO(2), KC_SPC,  MO(1),         KC_RGUI, KC_RALT, KC_RCTL, KC_HYPR, KC_PGDN, KC_F5),
 
   /* Keymap Vi Layer: pseudo vi normal mode and higher fn keys
    * ,----------------------------------------------------------------.
@@ -72,11 +72,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
 [1] = LAYOUT_65_ansi_split_space(
   _______, _______, _______, _______,  DM_END, _______, _______, _______, _______, _______,  DM_HOME, KC_F11,  KC_F12,  KC_LEFT, KC_F6, \
-  _______, _______, DM_WORD, _______, _______, _______, _______, _______, TO(0),   _______,  _______, _______, _______, _______, KC_F7, \
+  _______, _______, DM_WORD, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, KC_F7, \
   _______, TO(0),   _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______,          _______, KC_F8, \
   _______, _______, KC_DEL,  _______, _______, DM_BACK, _______, _______, _______, _______,  _______, _______,          _______, KC_F9, \
   _______, _______, _______, _______, _______, _______,                            _______,  _______, _______, _______, _______, KC_F10),
 
+[2] = LAYOUT_65_ansi_split_space(
+  _______, _______, _______, _______,  DM_END, _______, _______, _______, _______, _______,  DM_HOME, KC_F11,  KC_F12,  KC_LEFT, KC_F6, \
+  _______, _______, DM_WORD, _______, _______, _______, _______, _______, _______, _______,  _______, _______, _______, _______, KC_F7, \
+  _______, TO(0),   _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, _______, _______,          _______, KC_F8, \
+  _______, _______, KC_DEL,  _______, _______, DM_BACK, _______, _______, _______, _______,  _______, _______,          _______, KC_F9, \
+  _______, _______, _______, _______, _______, _______,                            _______,  _______, _______, _______, _______, KC_F10),
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {

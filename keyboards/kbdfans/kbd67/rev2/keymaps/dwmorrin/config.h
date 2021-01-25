@@ -19,6 +19,3 @@
 // place overrides here
 #undef RGBLIGHT_ANIMATIONS
 #define RGBLIGHT_LAYERS
-
-// mod tap timeout, default is 200
-#define TAPPING_TERM 150
